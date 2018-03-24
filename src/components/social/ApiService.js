@@ -3,7 +3,7 @@ const services = require('../../constants/services');
 
 const adapters = {
 	'FACEBOOK': require('../../adapters/FacebookAdapter'),
-	'TWITTER': require('../../adapters/FacebookAdapter'),
+	'TWITTER': require('../../adapters/TwitterAdapter'),
 	'INSTAGRAM': require('../../adapters/FacebookAdapter'),
 };
 
