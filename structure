@@ -1,0 +1,36 @@
+
+// Issues
+* Avoid redundancy
+
+
+// Masters mapping
+
+service_type: [ fb, insta, tw ]
+post_type: [ mention, like, share ]
+post_action: [ like, share, comment ]
+
+post_action_mapping: Map<post_type, Array<action>>
+	- like: [ ]
+	- post: [ like, comment, share ]
+	- mention: [ like, comment, share ]
+
+
+// DB
+
+User:
+	- _id: ObjectID
+	- accounts: Array<Account>
+
+Account:
+	- _id: ObjectID
+	- name: String
+	- email: String
+	- token: String
+	- type: String
+
+Activity:
+	- _id: ObjectID
+	- account_type: String // Type of account
+	- type: String // Type of activity
+
+
