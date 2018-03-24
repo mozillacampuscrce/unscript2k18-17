@@ -10,11 +10,21 @@ const adapters = {
 module.exports = class ApiService {
 
 	constructor(serviceType) {
-		this.adapter = adapters[serviceType];
+		const AdapterClass = adapters[serviceType];
+
+		if(AdapterClass) {
+			this.adapter = new AdapterClass();
+		} else {
+			throw new Error('Fuck You');
+		}
 	}
 
 	fetchFeed() {
-		return this.adapter.fetch()
+		return this.adapter.fetchFeed()
 			.then(data => this.adapter.normalize(data));
+	}
+
+	authenticate(data) {
+		return this.adapter.authenticate(data);
 	}
 }

@@ -5,4 +5,5 @@
 module.exports = app => {
 
 	require('./components/social/controller-social')(app);
+	require('./components/social/controller-auth')(app);
 };
