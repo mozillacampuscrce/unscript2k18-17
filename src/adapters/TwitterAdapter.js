@@ -1,9 +1,6 @@
 
 const fetch = require('node-fetch');
 
-const passport = require('passport');
-
-const config = require('../constants/config');
 const services = require('../constants/services');
 const endpoints = require('../constants/endpoints');
 const BaseAdapter = require('./BaseAdapter');
@@ -30,16 +27,10 @@ module.exports = class TwitterAdapter extends BaseAdapter {
 	}
 
 	authenticate(req, res, next) {
-		return passport.authenticate('twitter', { 
-			scope : [ 'public_profile', 'email' ],
-		})(req, res, next);
+		return this.getAuthMiddleware('twitter')(req, res, next);
 	}
 
 	authCallback(req, res, next) {
-		return passport.authenticate('twitter', {
-			successRedirect : config.loginSuccessRedirect,
-			failureRedirect : config.loginFailRedirect,
-			failureFlash : true,
-		})(req, res, next);
+		return this.getCallbackMiddleWare('twitter')(req, res, next);
 	}
 }

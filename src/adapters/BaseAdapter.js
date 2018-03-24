@@ -1,4 +1,7 @@
 
+const passport = require('passport');
+
+const config = require('../constants/config');
 
 module.exports = class BaseAdapter {
 
@@ -8,4 +11,18 @@ module.exports = class BaseAdapter {
 	normalize(data) { return data; }
 	authenticate() {}
 	authCallback() {}
+
+	getAuthMiddleware(serviceKey) {
+		return passport.authenticate('twitter', { 
+			scope : [ 'public_profile', 'email' ],
+		});
+	}
+
+	getCallbackMiddleware(serviceKey) {
+		return passport.authenticate(serviceKey, {
+			successRedirect : config.loginSuccessRedirect,
+			failureRedirect : config.loginFailRedirect,
+			failureFlash : true,
+		});
+	}
 }

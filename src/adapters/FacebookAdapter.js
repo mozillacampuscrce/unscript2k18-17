@@ -30,16 +30,10 @@ module.exports = class FacebookAdapter extends BaseAdapter {
 	}
 
 	authenticate(req, res, next) {
-		return passport.authenticate('facebook', { 
-			scope : [ 'public_profile', 'email' ],
-		})(req, res, next);
+		return this.getAuthMiddleware('facebook')(req, res, next);
 	}
 
 	authCallback(req, res, next) {
-		return passport.authenticate('facebook', {
-			successRedirect : config.loginSuccessRedirect,
-			failureRedirect : config.loginFailRedirect,
-			failureFlash : true,
-		})(req, res, next);
+		return this.getCallbackMiddleWare('facebook')(req, res, next);
 	}
 }

@@ -6,4 +6,5 @@ module.exports = {
 	loginSuccessRedirect: '/profile',
 
 	facebookCallback: 'http://localhost:8080/api/auth/fb/callback',
+	twitterCallback: 'http://localhost:8080/api/auth/tw/callback',
 };

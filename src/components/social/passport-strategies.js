@@ -1,8 +1,9 @@
 
 const passport = require('passport');
-const FacebookStrategy   = require('passport-facebook').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
+const TwitterStrategy = require('passport-facebook').Strategy;
 
-const { FACEBOOK } = require('../../constants/passport-config');
+const { FACEBOOK, TWITTER } = require('../../constants/passport-config');
 
 module.exports = () => {
 
@@ -11,7 +12,7 @@ module.exports = () => {
 		clientSecret    : FACEBOOK.appSecret,
 		callbackURL     : FACEBOOK.callback,
 	}, function(token, refreshToken, profile, done) {
-		console.log(profile);
+		console.log(token, refreshToken, profile);
 		process.nextTick(function() {
 
 			// // find the user in the database based on their facebook id
@@ -47,6 +48,15 @@ module.exports = () => {
 
 			// });
 		});
+	}));
 
+
+	passport.use(new TwitterStrategy({
+		clientID: TWITTER.appId,
+		clientSecret: TWITTER.appSecret,
+		callbackURL: TWITTER.callback,
+	}, function(token, refreshToken, profile, done) {
+		console.log(token, refreshToken, profile);
+		done(null, profile);
 	}));
 };

@@ -1,14 +1,18 @@
 
 const config = require('./config');
 
+const env = key => process.env[key];
+
 module.exports = {
 	FACEBOOK: {
-		appId: '357415738095571',
-		appSecret: 'e5bc73bbe793426e0f9198c3d0903883',
+		appId: env('FB_APP_ID'),
+		appSecret: env('FB_APP_SECRET'),
 		callback: config.facebookCallback,
 	},
 	TWITTER: {
-
+		appId: env('TW_APP_ID'),
+        appSecret: env('TW_APP_SECRET'),
+        callback: config.twitterCallback,
 	},
 	INSTAGRAM: {
 
