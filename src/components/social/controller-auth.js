@@ -4,18 +4,33 @@ const services = require('../../constants/services');
 
 const ApiService = require('./ApiService');
 
+const { getServiceName } = require('../../libs/helper-services');
+
 module.exports = (app) => {
 
-	app.get(`${config.apiBaseUrl}/auth/:service`, (req, res) => {
+	app.get(`${config.apiBaseUrl}/auth/:service`, (req, res, next) => {
 
-		const service = Object.keys(services)
-			.filter(serviceName => services[serviceName] === req.params.service)[0];
+		const service = getServiceName(req.params.service);
 
 		if(service) {
 			const api = new ApiService(service);
-
-			api.authenticate({})
-				.then(result => res.end(result));
+			return api.authenticate(req, res, next);
 		}
 	});
+
+	app.get(`${config.apiBaseUrl}/auth/:service/callback`, (req, res, next) => {
+
+		const service = getServiceName(req.params.service);
+
+		if(service) {
+			const api = new ApiService(service);
+			return api.authCallback(req, res, next);
+		}
+	});
+
+	// route for logging out
+    app.get(`${config.apiBaseUrl}/auth/logout`, function(req, res) {
+        req.logout();
+        res.redirect('/');
+    });
 };

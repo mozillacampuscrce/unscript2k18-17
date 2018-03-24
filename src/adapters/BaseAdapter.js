@@ -6,4 +6,6 @@ module.exports = class BaseAdapter {
 
 	fetch() { return Promise.reject('Fuck off'); }
 	normalize(data) { return data; }
+	authenticate() {}
+	authCallback() {}
 }

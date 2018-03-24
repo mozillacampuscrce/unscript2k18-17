@@ -17,10 +17,12 @@ module.exports = (app) => {
 		];
 
 		// If the services to fetch is specified, filter out the others
-		if(requestedServices.length) {
+		if(req.query.services) {
 			apiList = apiList
 				.filter(name => requestedServices.includes(services[name]));
 		}
+
+		console.log(requestedServices, apiList);
 
 		const apiPromiseList = apiList
 			.map(serviceName => new ApiService(serviceName))
