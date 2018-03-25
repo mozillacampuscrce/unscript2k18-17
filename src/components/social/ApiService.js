@@ -11,17 +11,16 @@ module.exports = class ApiService {
 
 	constructor(serviceType) {
 		const AdapterClass = adapters[serviceType];
-		console.log(serviceType);
 
 		if(AdapterClass) {
 			this.adapter = new AdapterClass();
 		} else {
-			throw new Error('Fuck You');
+			throw new Error('Invalid service');
 		}
 	}
 
 	fetchFeed() {
-		return this.adapter.fetchFeed()
+		return this.adapter.fetchFeed(userId, accessToken)
 			.then(data => this.adapter.normalize(data));
 	}
 

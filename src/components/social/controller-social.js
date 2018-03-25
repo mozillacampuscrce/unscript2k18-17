@@ -12,8 +12,8 @@ module.exports = (app) => {
 
 		let apiList = [
 			'FACEBOOK',
-			'TWITTER',
-			'INSTAGRAM',
+			// 'TWITTER',
+			// 'INSTAGRAM',
 		];
 
 		// If the services to fetch is specified, filter out the others
@@ -21,8 +21,6 @@ module.exports = (app) => {
 			apiList = apiList
 				.filter(name => requestedServices.includes(services[name]));
 		}
-
-		console.log(requestedServices, apiList);
 
 		const apiPromiseList = apiList
 			.map(serviceName => new ApiService(serviceName))

@@ -31,6 +31,6 @@ module.exports = class TwitterAdapter extends BaseAdapter {
 	}
 
 	authCallback(req, res, next) {
-		return this.getCallbackMiddleWare('twitter')(req, res, next);
+		return this.getCallbackMiddleware('twitter')(req, res, next);
 	}
 }

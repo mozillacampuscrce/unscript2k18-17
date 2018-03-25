@@ -15,13 +15,13 @@ module.exports = class FacebookAdapter extends BaseAdapter {
 		this.serviceType = services.FACEBOOK;
 	}
 
-	fetchFeed() {
+	fetchFeed(userId, accessToken) {
 
 		const options = {
 			method: 'get',
 		};
 
-		return fetch(endpoints.FACEBOOK.FEED('useraidy', 'accesstokan'), options)
+		return fetch(endpoints.FACEBOOK.FEED('1859015324190927', 'EAAFFEVYbN9MBAGta0Nw5rUAVt2SlYqGXtKrS0lpLFy0Qvw52VoZCBzqwAZBzo8ojOpS1RkJuPZAe73kBSq0SGSUOBfVjnei83FaqGq7QsoQOLEsepRfZCYq1c2QrVW2w31ZCSnxkXYqucdEkup5njkzdUJdPvP4ZCVBMmEeHPFzgZDZD'), options)
 			.then(res => res.json());
 	}
 
@@ -34,6 +34,6 @@ module.exports = class FacebookAdapter extends BaseAdapter {
 	}
 
 	authCallback(req, res, next) {
-		return this.getCallbackMiddleWare('facebook')(req, res, next);
+		return this.getCallbackMiddleware('facebook')(req, res, next);
 	}
 }

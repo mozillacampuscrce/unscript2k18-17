@@ -1,10 +1,14 @@
 
+const baseDomain = process.env.DOMAIN;
+
+const apiBaseUrl = '/api';
+
 module.exports = {
-	apiBaseUrl: '/api',
+	apiBaseUrl,
 
-	loginFailRedirect: '/login',
-	loginSuccessRedirect: '/profile',
+	loginFailRedirect: '/',
+	loginSuccessRedirect: '/',
 
-	facebookCallback: 'http://localhost:8080/api/auth/fb/callback',
-	twitterCallback: 'http://localhost:8080/api/auth/tw/callback',
+	facebookCallback: `${baseDomain}${apiBaseUrl}/auth/fb/callback`,
+	twitterCallback: `${baseDomain}${apiBaseUrl}/auth/tw/callback`,
 };
